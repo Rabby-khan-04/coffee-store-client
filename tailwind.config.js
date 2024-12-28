@@ -19,6 +19,7 @@ export default {
         cultured: "#F5F4F1",
         alabaster: "#ECEAE3",
         charcoal: "#374151",
+        anti_flash_white: "#F4F3F0",
       },
     },
   },

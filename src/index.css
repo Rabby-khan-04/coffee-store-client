@@ -15,6 +15,14 @@
   @apply text-2xl font-rancho font-normal text-white bg-middle_yellow_red py-3 px-6 rounded-md border-2 border-dark_sienna transition-all duration-300 hover:bg-cultured hover:text-dark_sienna inline-block;
 }
 
+.input__label {
+  @apply text-xl font-raleway text-eerie_black/80 font-semibold;
+}
+
+.submit__btn {
+  @apply text-2xl font-rancho font-normal text-dark_sienna bg-middle_yellow_red py-3 px-6 rounded-md border-2 border-dark_sienna transition-all duration-300 hover:bg-cultured inline-block;
+}
+
 .text__shadow {
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }

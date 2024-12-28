@@ -6,7 +6,7 @@ import CoffeeCard from "../Coffee/CoffeeCard";
 
 const Featured = () => {
   return (
-    <section className="py-28 relative">
+    <section className="pt-28 relative">
       <div className="container">
         <div className="text-center mb-12">
           <p className="text-eerie_black font-raleway text-xl mb-2">

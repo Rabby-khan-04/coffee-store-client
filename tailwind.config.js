@@ -18,6 +18,7 @@ export default {
         middle_yellow_red: "#E3B577",
         cultured: "#F5F4F1",
         alabaster: "#ECEAE3",
+        charcoal: "#374151",
       },
     },
   },

@@ -3,8 +3,8 @@ import MainLayout from "../layouts/MainLayout";
 import ErrorPage from "../pages/ErrorPage/ErrorPage";
 import Home from "../pages/Home/Home";
 import AddCoffee from "../pages/Coffee/AddCoffee";
-import EditCoffee from "../pages/Coffee/EditCoffee";
 import Coffee from "../pages/Coffee/Coffee";
+import UpdateCoffee from "../pages/Coffee/UpdateCoffee";
 
 const router = createBrowserRouter([
   {
@@ -21,12 +21,12 @@ const router = createBrowserRouter([
         element: <AddCoffee />,
       },
       {
-        path: "edit-coffee",
-        element: <EditCoffee />,
-      },
-      {
         path: "coffee/:id",
         element: <Coffee />,
+      },
+      {
+        path: "update-coffee/:id",
+        element: <UpdateCoffee />,
       },
     ],
   },

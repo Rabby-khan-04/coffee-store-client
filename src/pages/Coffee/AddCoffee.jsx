@@ -3,16 +3,21 @@ import { FaArrowLeft } from "react-icons/fa6";
 import addCoffeeBG from "../../assets/image/add-coffee-bg.png";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { useState } from "react";
 
 const AddCoffee = () => {
+  const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
 
-  const onSubmit = async (data) => {
+  const addCoffee = async (data) => {
     try {
+      setLoading(true);
       const formData = new FormData();
       Object.entries(data).forEach(([key, value]) => {
         formData.append(key, key === "photo" ? value[0] : value);
@@ -28,8 +33,17 @@ const AddCoffee = () => {
         }
       );
 
+      setLoading(false);
       console.log(response);
+
+      Swal.fire({
+        title: "Success!!",
+        text: "Coffee Added Successfully!",
+        icon: "success",
+      });
+      reset();
     } catch (error) {
+      setLoading(false);
       console.error(
         `ERROR: ${error.response ? error.response.data : error.message}`
       );
@@ -65,7 +79,7 @@ const AddCoffee = () => {
 
           {/* Form */}
 
-          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={handleSubmit(addCoffee)} className="space-y-4">
             <div className="flex items-center gap-6">
               <div className="w-full space-y-4">
                 <label className="input__label" htmlFor="name">
@@ -175,7 +189,24 @@ const AddCoffee = () => {
               </div>
             </div>
 
-            <div>
+            <div className="flex items-center gap-6">
+              <div className="w-full space-y-4">
+                <label className="input__label" htmlFor="price">
+                  Price
+                </label>
+                <input
+                  type="number"
+                  id="price"
+                  className="input block w-full"
+                  placeholder="Enter coffee price"
+                  {...register("price", { required: true })}
+                />
+                {errors.details && (
+                  <span className="text-red-600 text-base font-raleway inline-block">
+                    This field is required
+                  </span>
+                )}
+              </div>
               <div className="w-full space-y-4">
                 <label className="input__label" htmlFor="photo">
                   Photo
@@ -195,11 +226,17 @@ const AddCoffee = () => {
                 )}
               </div>
             </div>
-            <input
+            <button
               type="submit"
               className="submit__btn text__shadow w-full cursor-pointer"
-              value="Add Coffee"
-            />
+            >
+              <div className="flex items-center justify-center gap-4">
+                <span>Add Coffee</span>
+                {loading && (
+                  <span className="loading loading-spinner loading-md text-dark_sienna"></span>
+                )}
+              </div>
+            </button>
           </form>
         </div>
       </div>

@@ -3,8 +3,26 @@ import shop from "../../assets/image/featured-shop.png";
 import { Link } from "react-router-dom";
 import { TbMug } from "react-icons/tb";
 import CoffeeCard from "../Coffee/CoffeeCard";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 const Featured = () => {
+  const [coffees, SetCoffees] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          "http://localhost:5000/api/v1/coffee/all-coffee"
+        );
+        SetCoffees(response.data.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <section className="pt-28 relative">
       <div className="container">
@@ -26,10 +44,9 @@ const Featured = () => {
 
         {/* Coffee Container */}
         <div className="grid grid-cols-2 gap-6">
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
-          <CoffeeCard />
+          {coffees.map((coffee) => (
+            <CoffeeCard key={coffee._id} coffee={coffee} />
+          ))}
         </div>
       </div>
 

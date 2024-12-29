@@ -5,6 +5,7 @@ import Home from "../pages/Home/Home";
 import AddCoffee from "../pages/Coffee/AddCoffee";
 import Coffee from "../pages/Coffee/Coffee";
 import UpdateCoffee from "../pages/Coffee/UpdateCoffee";
+import axios from "axios";
 
 const router = createBrowserRouter([
   {
@@ -23,10 +24,14 @@ const router = createBrowserRouter([
       {
         path: "coffee/:id",
         element: <Coffee />,
+        loader: ({ params }) =>
+          axios.get(`http://localhost:5000/api/v1/coffee/details/${params.id}`),
       },
       {
         path: "update-coffee/:id",
         element: <UpdateCoffee />,
+        loader: ({ params }) =>
+          axios.get(`http://localhost:5000/api/v1/coffee/details/${params.id}`),
       },
     ],
   },

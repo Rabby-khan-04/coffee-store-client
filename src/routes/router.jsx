@@ -6,6 +6,9 @@ import AddCoffee from "../pages/Coffee/AddCoffee";
 import Coffee from "../pages/Coffee/Coffee";
 import UpdateCoffee from "../pages/Coffee/UpdateCoffee";
 import axios from "axios";
+import SignUp from "../pages/Auth/SignUp";
+import Login from "../pages/Auth/Login";
+import Users from "../pages/Users/Users";
 
 const router = createBrowserRouter([
   {
@@ -25,13 +28,26 @@ const router = createBrowserRouter([
         path: "coffee/:id",
         element: <Coffee />,
         loader: ({ params }) =>
-          axios.get(`http://localhost:5000/api/v1/coffee/details/${params.id}`),
+          axios.get(`/api/v1/coffee/details/${params.id}`),
       },
       {
         path: "update-coffee/:id",
         element: <UpdateCoffee />,
         loader: ({ params }) =>
-          axios.get(`http://localhost:5000/api/v1/coffee/details/${params.id}`),
+          axios.get(`/api/v1/coffee/details/${params.id}`),
+      },
+      {
+        path: "signup",
+        element: <SignUp />,
+      },
+      {
+        path: "login",
+        element: <Login />,
+      },
+      {
+        path: "users",
+        element: <Users />,
+        loader: () => axios.get("/api/v1/users/users"),
       },
     ],
   },

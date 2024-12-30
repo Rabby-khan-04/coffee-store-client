@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import Swal from "sweetalert2";
 import axios from "axios";
 
-const CoffeeCard = ({ coffee }) => {
+const CoffeeCard = ({ coffee, coffees, setCoffees }) => {
   const handleDeleteCoffee = (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -15,11 +15,14 @@ const CoffeeCard = ({ coffee }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         try {
-          axios.delete(`http://localhost:5000/api/v1/coffee/delete/${id}`);
+          axios.delete(`/api/v1/coffee/delete/${id}`);
         } catch (error) {
           console.log(error);
         }
         Swal.fire("Coffee Deleted Successfully!", "", "success");
+
+        const updatedCoffees = coffees.filter((coffee) => coffee._id !== id);
+        setCoffees(updatedCoffees);
       }
     });
   };
@@ -70,6 +73,8 @@ const CoffeeCard = ({ coffee }) => {
 
 CoffeeCard.propTypes = {
   coffee: PropTypes.object,
+  coffees: PropTypes.array,
+  setCoffees: PropTypes.func,
 };
 
 export default CoffeeCard;

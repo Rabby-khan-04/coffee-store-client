@@ -7,15 +7,13 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const Featured = () => {
-  const [coffees, SetCoffees] = useState([]);
+  const [coffees, setCoffees] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          "http://localhost:5000/api/v1/coffee/all-coffee"
-        );
-        SetCoffees(response.data.data);
+        const response = await axios.get("/api/v1/coffee/all-coffee");
+        setCoffees(response.data.data);
       } catch (error) {
         console.log(error);
       }
@@ -45,7 +43,12 @@ const Featured = () => {
         {/* Coffee Container */}
         <div className="grid grid-cols-2 gap-6">
           {coffees.map((coffee) => (
-            <CoffeeCard key={coffee._id} coffee={coffee} />
+            <CoffeeCard
+              key={coffee._id}
+              coffee={coffee}
+              coffees={coffees}
+              setCoffees={setCoffees}
+            />
           ))}
         </div>
       </div>

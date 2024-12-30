@@ -23,15 +23,11 @@ const AddCoffee = () => {
         formData.append(key, key === "photo" ? value[0] : value);
       });
 
-      const response = await axios.post(
-        "http://localhost:5000/api/v1/coffee/add-coffee",
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-          },
-        }
-      );
+      const response = await axios.post("/api/v1/coffee/add-coffee", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
 
       setLoading(false);
       console.log(response);
